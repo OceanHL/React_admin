@@ -1,17 +1,23 @@
+/* 
+入口js文件
+
+*/
 import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
+import ReactDom from 'react-dom';
+
+// import 'antd/dist/antd.css';
 import App from './App';
-import * as serviceWorker from './serviceWorker';
+import storageUtils from './utils/storageUtils';
+import memoryUtils from './utils/memoryUtils';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+// 读取Local中保存user, 保存到内存中
+const user = storageUtils.getUser()
+// 入口文件中 存入内存中
+memoryUtils.user = user;
+console.log(user);
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+//  将App 组件标签渲染到 index 页面的 div上
+ReactDom.render(
+  <App/>,
+  document.getElementById("root")
+)
