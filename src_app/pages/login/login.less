@@ -1,0 +1,56 @@
+.login{
+    width: 100%;
+    height: 100%;
+    // background: url('./images/bg.jpg') no-repeat 100% 100% ;
+    background-image: url('./images/bg.jpg') ;
+    // 跟随父亲大小  100% 100%
+    background-size: 100% 100%;
+    
+    .login-header {
+        // 给大盒子  加  flex弹性布局
+        display: flex;
+        // 利用交叉轴进行 居中设置
+        align-items: center;
+        height: 80px;
+        background-color: rgba(21, 20, 13, 0.5);
+        img {
+            width: 40px;
+            height: 40px;
+            margin: 0 15px 0 50px;
+        }
+        h1 {
+            font-size: 30px;
+            color: white;
+        }
+    }
+    .login-content {
+        width: 400px;
+        height: 325px;
+        background-color: white;
+        margin: 50px auto;
+        padding: 20px 40px;
+        .login-form {
+            max-width: 336px;
+            // padding: 0;
+            .login-form-forgot {
+                float: right;
+              }
+            .ant-col-rtl .login-form-forgot {
+                float: left;
+              }
+            .login-form-button {
+                width: 100%;
+            }
+            .register-new {
+                float: right;
+                margin-top: 9px;
+            }
+          }
+        
+        h2 {
+            text-align: center;
+            font-size: 30px;
+            font-weight: bolder;
+        }
+    }
+}

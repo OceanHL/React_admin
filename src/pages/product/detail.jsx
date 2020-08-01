@@ -10,6 +10,7 @@ import {ArrowLeftOutlined} from '@ant-design/icons';
 import LinkButton from '../../components/link-button';
 import {BASE_IMG_URL}  from '../../utils/constants.js';
 import {reqCategory} from '../../api';
+import memoryUtils from '../../utils/memoryUtils';
 /* 
 Product的详情子路由组件
 */
@@ -31,7 +32,7 @@ export default class ProductDetail extends Component {
     // 就算是生命周期函数 也需要 加async
     async componentDidMount() {
         // 得到当前商品的分类ID
-        const {pCategoryId, categoryId} = this.props.location.state
+        const {pCategoryId, categoryId} = memoryUtils.product;
         if(categoryId === '0') { // 一级分类下的商品
             const result = await reqCategory(pCategoryId)
             const cName1 = result.data.name;
@@ -60,11 +61,16 @@ export default class ProductDetail extends Component {
 
     }
 
+    /* 
+    在卸载之前清除保存的数据
+    */
+    componentWillUnmount() {
+        memoryUtils.product = {};
+    }
     render() {
 
         // 读取携带过来的state数据
-        console.log(this.props.location.state);
-        const {name,desc,price,_id, categoryId, pCategoryId, imgs, detail} = this.props.location.state;
+        const {name,desc,price, imgs, detail} = memoryUtils.product;
         const {cName1, cName2} = this.state;
 
         const title = (

@@ -9,7 +9,7 @@ import jsonp from 'jsonp';
 import {message} from 'antd';
 import ajax from './ajax';
 // const BASE = 'http://localhost:5000';
-const BASE = '';
+const BASE = '/api';
 //  登录login
 /* export function reqLogin(username, password) {
    return ajax('/login', {username, password}, 'POST');

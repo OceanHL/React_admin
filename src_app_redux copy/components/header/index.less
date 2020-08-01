@@ -1,0 +1,64 @@
+.header {
+    height: 80px;
+    background-color: #fff;
+    .header-top {
+        text-align: right;
+        line-height: 40px;
+        padding-right: 30px; // 用margin 线会过来
+        height: 40px;
+        border-bottom: 2px solid green;
+        span{
+            margin-right: 15px;
+        }
+        .header-top-button {
+            background-color: transparent; // 1.背景设置透明
+            border: none;  // 2. 无边框
+            // border-style: none;   // 2、 无边框
+            outline: none;     // 3. 获得焦点也无边框
+            cursor: pointer;
+            text-decoration: underline;
+            display: inline;
+            margin: 0;
+            padding: 0;
+            color:#1DA57A;
+            
+        }
+        .header-top-button:hover,
+        .header-top-button:focus{
+            text-decoration: none;
+        }
+    }
+
+    .header-bottom {
+        display: flex;
+        align-items: center; // flex中的垂直居中
+        height: 40px;
+        .header-bottom-left{
+            position: relative;
+            width: 25%;
+            text-align: center;
+            font-size: 20px;
+            &::after {
+                content: '';
+                position: absolute; // 子绝父相
+                border-top: 20px solid white;
+                right: 50%;
+                top: 100%;
+                transform: translatex(50%);// 向右移动自身的百分之50
+                border-right: 20px solid transparent;
+                border-bottom: 20px solid transparent;
+                border-left: 20px solid transparent;
+            }
+        }
+        .header-bottom-right{
+            width: 75%;
+            text-align: right;
+            margin-right: 30px;
+            img {
+                width: 30px;
+                height: 20px;
+                margin: 0 15px 5px 15px;
+            }
+        }
+    }
+}

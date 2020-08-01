@@ -3,4 +3,5 @@
 */
 export default {
     user: {},  // 保持当前登录的user
+    product: {}, // 指定的商品对象
 }

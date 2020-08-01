@@ -1,7 +1,7 @@
 import React,{Component} from 'react';
 import {Redirect, Route, Switch} from 'react-router-dom';
 import { Layout } from 'antd';
-import memoryUtils from '../../utils/memoryUtils';
+import {connect} from 'react-redux';
 import LeftNav from '../../components/left-nav';
 import Header from '../../components/header';
 import Home from '../home/home';
@@ -12,14 +12,15 @@ import User from '../user/user';
 import Bar from '../charts/bar';
 import Line from '../charts/line';
 import Pie from '../charts/pie';
+import NotFound from '../not-found/not-found';
 /* 后台管理的路由组件 */
 
 // 布局
 const { Footer, Sider, Content } = Layout;
 
-export default class Admin extends Component{
+class Admin extends Component{
     render() {
-        const user = memoryUtils.user;
+        const user = this.props.user;
         // 如果内存中没有存储user ==> 当前没有登录
         if(!user || !user._id){ // user为空 或者 user._id为空时
             //  自动跳转到登录页面 (在render()中实现跳转)
@@ -41,6 +42,9 @@ export default class Admin extends Component{
                         {/* 因为在App根组件中 已经有一个 大的路由包裹了 */}
                         {/* <BrowserRouter> */}
                             <Switch>
+                                {/* 一次往下匹配 */}
+                                {/* 必须要加exact精确匹配 不然 访问任何页面 都会跳转到/home 访问 / 根路径 则会跳转到 /home */}
+                                <Redirect exact={true} from='/' to='/home' />
                                 <Route path="/home" component={Home}></Route>
                                 <Route path="/category" component={Category}></Route>
                                 <Route path="/product" component={Product}></Route>
@@ -49,9 +53,9 @@ export default class Admin extends Component{
                                 <Route path="/charts/bar" component={Bar}></Route>
                                 <Route path="/charts/line" component={Line}></Route>
                                 <Route path="/charts/pie" component={Pie}></Route>
+                                <Route component={NotFound}/> {/* 上面没有一个匹配，直接显示 */}
                                 {/* 默认显示 Home  前面都没有匹配到  重定向到home*/}
                                 {/* logo的链接跳转 / 因为都没有匹配到 所有进行重定向 */}
-                                <Redirect to='/home' />
                             </Switch>
                         {/* </BrowserRouter> */}
                     </Content>
@@ -61,3 +65,8 @@ export default class Admin extends Component{
         )
     }
 }
+
+export default connect(
+    state => ({user: state.user}),
+    {}
+)(Admin)

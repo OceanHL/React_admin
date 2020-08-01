@@ -15,6 +15,7 @@ import PicturesWall from './pictures-wall';
 import LinkButton from '../../components/link-button';
 import {reqCategorys, reqAddOrUpdateProduct} from '../../api';
 import RichTextEditor from './rich-text-editor';
+import memoryUtils from '../../utils/memoryUtils';
 
 
 /* 
@@ -202,14 +203,20 @@ export default class ProductAddUpdate extends Component {
 
     UNSAFE_componentWillMount() {
         // 取出携带的state
-        const product = this.props.location.state; // 如果是添加 没有值， 否则有值
+        const product = memoryUtils.product; // 如果是添加 没有值， 否则有值
         console.log(product);
         // 保存是否是更新的标识 --> 强制转换为 布尔类型
-        this.isUpdate = !!product // !! 两个 ！！ 强制转换为布尔类型
+        this.isUpdate = !!product._id // !! 两个 ！！ 强制转换为布尔类型
         // 保存商品(如果没有， 保存的是{} 避免报错)
         this.product = product || {}  // 空对象{} 可以用 .name等
     }
 
+    /* 
+    在卸载之前清除保存的数据
+    */
+    componentWillUnmount() {
+        memoryUtils.product = {};
+    }
 
     render() {
 
